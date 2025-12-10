@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react"
 import { TaskInput } from "@/components/task-input"
 import { TaskList } from "@/components/task-list"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export interface Task {
   id: string
@@ -58,19 +60,35 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-fuchsia-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl" />
+      </div>
       <div className="mx-auto max-w-2xl px-4 py-12">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight text-balance">Tasks</h1>
-          <p className="mt-2 text-muted-foreground">
-            {completedCount} of {tasks.length} completed
-          </p>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight text-balance">Tasks</h1>
+            <p className="mt-2 text-muted-foreground">
+              {completedCount} of {tasks.length} completed
+            </p>
+          </div>
+          <Button asChild>
+            <Link
+              href="/about"
+            >
+              Kelompok
+            </Link>
+          </Button>
         </div>
 
         {/* Input */}
         <div className="mb-8">
           <TaskInput onAdd={addTask} />
         </div>
+
+
 
         {/* Task List */}
         {tasks.length === 0 ? (
